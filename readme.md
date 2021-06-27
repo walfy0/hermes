@@ -10,9 +10,9 @@ a lightweight proxy tool,use golang code,socks5 + tcp communication
 - client: sh ./build.sh
 
 ## todo
-- [ ]support more encryption type
-- [ ]support write password at startup
-- [ ]udp communication
+- [ ] support more encryption type
+- [ ] support write password at startup
+- [ ] udp communication
 
 ## refer
 - https://github.com/gwuhaolin/blog/issues/12
