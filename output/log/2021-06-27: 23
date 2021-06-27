@@ -1,0 +1,2 @@
+time="2021-06-27T23:54:25+08:00" level=info msg="44214 44224" func=github.com/hermes/service.StartDaemon file="/home/walfy/go/src/github.com/hermes/service/daemon.go:21"
+time="2021-06-27T23:54:25+08:00" level=error msg="err: %!(EXTRA *net.OpError=listen tcp :1081: bind: address already in use)" func="github.com/hermes/service.(*SsrClient).Listen" file="/home/walfy/go/src/github.com/hermes/service/client.go:54"
