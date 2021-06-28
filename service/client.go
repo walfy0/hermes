@@ -1,36 +1,11 @@
 package service
 
 import (
-	"encoding/json"
-	"flag"
-	"io/ioutil"
 	"net"
+	"strconv"
 
 	"github.com/sirupsen/logrus"
 )
-
-type Config struct {
-	User     string `json:"user"`
-	Password string `json:"password"`
-	Host     string `json:"host"`
-	Port     int    `json:"port"`
-}
-
-func goClient() {
-	defaultConfig := Config{}
-	data, err := ioutil.ReadFile("./config.json")
-	if err != nil {
-		panic("read config.json err")
-	}
-	err = json.Unmarshal(data, &defaultConfig)
-	if err != nil {
-		panic("json parse err")
-	}
-	flag.StringVar(&defaultConfig.User, "u", "root", "")
-	flag.StringVar(&defaultConfig.Password, "u", "", "")
-	flag.StringVar(&defaultConfig.Host, "u", "localhost", "")
-	flag.IntVar(&defaultConfig.Port, "u", 1080, "")
-}
 
 //ss-local
 type SsrClient struct {
@@ -38,16 +13,17 @@ type SsrClient struct {
 }
 
 func NewSsrClient() SsrSocketInterface {
+	remoteAddr := ConfigJson.Host + ":" + strconv.Itoa(ConfigJson.Port)
 	return &SsrClient{
 		&SsrSocket{
 			addr:       ":1081",
-			remoteAddr: "127.0.0.1:1082",
-			// remoteAddr: "139.196.100.116:1081",
+			remoteAddr: remoteAddr,
 		},
 	}
 }
 
 func (c *SsrClient) Listen() error {
+	c.DoSignal()
 	var err error
 	c.conn, err = net.Listen("tcp", c.addr)
 	if err != nil {
@@ -57,13 +33,21 @@ func (c *SsrClient) Listen() error {
 	defer c.conn.Close()
 	logrus.Info("start ss-local")
 	for {
-		client, err := c.conn.Accept()
-		if err != nil {
-			client.Close()
-			return err
+		select {
+		case isClose := <-c.flag:
+			if isClose {
+				logrus.Info("client close listening")
+				return c.conn.Close()
+			}
+		default:
+			client, err := c.conn.Accept()
+			if err != nil {
+				client.Close()
+				return err
+			}
+			logrus.Info("go ac")
+			go c.Handle(client)
 		}
-		logrus.Info("go ac")
-		go c.Handle(client)
 	}
 }
 

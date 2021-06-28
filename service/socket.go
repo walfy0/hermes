@@ -1,7 +1,9 @@
 package service
 
 import (
+	"encoding/json"
 	"io"
+	"io/ioutil"
 	"net"
 	"os"
 	"os/signal"
@@ -11,6 +13,26 @@ import (
 	"github.com/hermes/common"
 	"github.com/sirupsen/logrus"
 )
+
+type Config struct {
+	User     string `json:"user"`
+	Password string `json:"password"`
+	Host     string `json:"host"`
+	Port     int    `json:"port"`
+}
+var ConfigJson Config
+
+func InitJson(filePath string) {
+	ConfigJson = Config{}
+	data, err := ioutil.ReadFile(filePath)
+	if err != nil {
+		panic(err)
+	}
+	err = json.Unmarshal(data, &ConfigJson)
+	if err != nil {
+		panic(err)
+	}
+}
 
 type SsrSocketInterface interface {
 	Listen() error
@@ -23,7 +45,8 @@ type SsrSocket struct {
 	user       string
 	password   string
 	conn       net.Listener
-	flag	   chan bool
+	flag       chan bool
+	json 	   Config
 }
 
 func (s *SsrSocket) Listen() error        { return nil }

@@ -10,7 +10,7 @@ import (
 	"github.com/sirupsen/logrus"
 )
 
-func Init() {
+func init() {
 	now := time.Now()
 	fileName := fmt.Sprintf("./output/log/%d-%02d-%02d_%02d", now.Year(), now.Month(), now.Day(), now.Hour())
 	write2, err := os.OpenFile(fileName, os.O_CREATE|os.O_WRONLY|os.O_APPEND, 0755)
@@ -22,8 +22,8 @@ func Init() {
 }
 
 func main() {
-	Init()
 	// service.StartDaemon()
+	service.InitJson("../config.json")
 	s := service.NewSsrService()
 	s.Listen()
 }

@@ -17,3 +17,4 @@ a lightweight proxy tool,use golang code,socks5 + tcp communication
 ## refer
 - https://github.com/gwuhaolin/blog/issues/12
 - https://segmentfault.com/a/1190000038247560
+- https://www.secrss.com/articles/18469

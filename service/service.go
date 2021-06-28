@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"io/ioutil"
 	"net"
+	"strconv"
 
 	"github.com/hermes/config"
 	"github.com/sirupsen/logrus"
@@ -19,9 +20,9 @@ type SsrService struct {
 func NewSsrService() SsrSocketInterface {
 	return &SsrService{
 		&SsrSocket{
-			addr:     ":1082",
-			user:     "walfy",
-			password: "123456",
+			addr:     ":" + strconv.Itoa(ConfigJson.Port),
+			user:     ConfigJson.User,
+			password: ConfigJson.Password,
 		},
 	}
 }
@@ -96,6 +97,7 @@ func (s *SsrService) Socks5Auth(client net.Conn) error {
 	}
 	ver, methodCount := int(buf[0]), int(buf[1])
 	if ver != 5 || n != methodCount+2 {
+		logrus.Info(ver, n)
 		logrus.Warnf("auth invalid version")
 		return errors.New("invalid version")
 	}

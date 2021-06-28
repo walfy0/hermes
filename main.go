@@ -23,7 +23,8 @@ func init() {
 }
 
 func main() {
-	service.StartDaemon()
+	// service.StartDaemon()
+	service.InitJson("./config.json")
 	s := service.NewSsrClient()
 	s.Listen()
 }
