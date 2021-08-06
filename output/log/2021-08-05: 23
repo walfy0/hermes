@@ -1,5 +1,0 @@
-time="2021-08-05T23:41:56+08:00" level=info msg="start listen signal!" func="github.com/hermes/service.(*SsrSocket).DoSignal.func1" file="/home/walfy/go/src/github.com/hermes/service/socket.go:61"
-time="2021-08-05T23:41:56+08:00" level=info msg="start ss-local" func="github.com/hermes/service.(*SsrClient).Listen" file="/home/walfy/go/src/github.com/hermes/service/client.go:34"
-time="2021-08-06T00:40:36+08:00" level=info msg="about to restart!" func="github.com/hermes/service.(*SsrSocket).DoSignal.func1" file="/home/walfy/go/src/github.com/hermes/service/socket.go:67"
-time="2021-08-06T00:40:36+08:00" level=info msg="restarting!" func="github.com/hermes/service.(*SsrSocket).DoSignal.func1" file="/home/walfy/go/src/github.com/hermes/service/socket.go:69"
-time="2021-08-06T00:40:46+08:00" level=info msg="restart success!" func="github.com/hermes/service.(*SsrSocket).DoSignal.func1" file="/home/walfy/go/src/github.com/hermes/service/socket.go:72"
