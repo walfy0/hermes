@@ -15,11 +15,13 @@ import (
 )
 
 type Config struct {
-	User     string `json:"user"`
-	Password string `json:"password"`
-	Host     string `json:"host"`
-	Port     int    `json:"port"`
+	User     		string `json:"user"`
+	Password 		string `json:"password"`
+	Host     		string `json:"host"`
+	Port    		int    `json:"port"`
+	EncrypMethod 	string `json:"encryp_method"`
 }
+
 var ConfigJson Config
 
 func InitJson(filePath string) {
@@ -46,7 +48,6 @@ type SsrSocket struct {
 	password   string
 	conn       net.Listener
 	flag       chan bool
-	json 	   Config
 }
 
 func (s *SsrSocket) Listen() error        { return nil }

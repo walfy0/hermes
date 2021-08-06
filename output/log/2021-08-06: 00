@@ -1,0 +1,2 @@
+time="2021-08-06T00:55:25+08:00" level=info msg="start listen signal!" func="github.com/hermes/service.(*SsrSocket).DoSignal.func1" file="/home/walfy/go/src/github.com/hermes/service/socket.go:62"
+time="2021-08-06T00:55:25+08:00" level=info msg="start ss-local" func="github.com/hermes/service.(*SsrClient).Listen" file="/home/walfy/go/src/github.com/hermes/service/client.go:34"

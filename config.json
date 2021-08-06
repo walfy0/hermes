@@ -1,6 +1,7 @@
 {
     "user": "walfy",
     "password": "123456",
-    "host": "127.0.0.1",
-    "port": 1082
+    "host": "139.196.100.116",
+    "port": 1081,
+    "encryp_method": "rc4_md5"
 }

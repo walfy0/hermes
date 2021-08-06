@@ -1,2 +1,5 @@
-./output
-./vscode
+output/
+.vscode/
+nohup.out
+proxy/output/
+proxy/nohup.out
